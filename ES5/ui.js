@@ -5,15 +5,15 @@ function UI(){
 UI.prototype.addFilmToUI=function(newFilm){
     const filmList=document.getElementById("films");
 
-    films.forEach(function(film) {
-    filmList.innerHTML+=`
+    filmList.innerHTML += `
     <tr>
-        <td><img src="${film.url}" style="width:230px" class="img-fluid:
-        <td>${film.title}</td>
-        <td>${film.director}</td>
+        <td><img src="${newFilm.url}" style="width:230px" class="img-fluid img-thumbnail"></td>
+        <td>${newFilm.title}</td>
+        <td>${newFilm.director}</td>
         <td><a href="#" class="btn btn-danger">Filmi Sil</a></td>
     </tr>`;
-    })}
+}
+
 
 UI.prototype.clearInputs=function(){
     for(let i=0; i<arguments.length; i++)
@@ -42,4 +42,19 @@ UI.prototype.deleteFilmFromUI=function(element){
 UI.prototype.clearAllFilmsFromUI=function(){
     const filmList=document.getElementById("films");
     filmList.innerHTML="";
+}
+
+UI.prototype.loadAllFilms = function (films) {
+    const filmList = document.getElementById("films");
+
+    films.forEach(function (film) {
+
+        filmList.innerHTML += `
+            <tr>
+            <td><img src="${film.url}" style="width:230px" class="img-fluid img-thumbnail"></td>
+            <td>${film.title}</td>
+            <td>${film.director}</td>
+            <td><a href="#" class="btn btn-danger">Filmi Sil</a></td>
+            </tr>`;
+    });
 }

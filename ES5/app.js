@@ -16,7 +16,13 @@ eventListener();
 
 function eventListener(){
     form.addEventListener("submit",addFilm);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let films = storage.getFilmsFromStorage();
+        ui.loadAllFilms(films);
+    });
     cardBody.addEventListener("click",deleteFilm);
+    clear.addEventListener("click",clearAllFilms);
 }
 function addFilm(e){
     e.preventDefault();     //postback i engellemek için prevent default dedim
@@ -40,5 +46,14 @@ function addFilm(e){
 function deleteFilm(e){
 e.preventDefault();
 if(e.target.className==="btn btn-danger")
-console.log("sil butonu döndü")
+ui.deleteFilmFromUI(e.target.parentElement.parentElement);
+(e.target.parentElement.previousElementSibling.previousElementSibling.textContent)
+        storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+    }
+
+function clearAllFilms() {
+    if (confirm("Emin misiniz?")) {
+        ui.clearAllFilmsFromUI();
+        storage.clearAllFilmsFromStorage();
+    }
 }
